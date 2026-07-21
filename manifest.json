@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "InterveneAI",
+  "version": "1.2.0",
+  "description": "Local workflow-switch tracking and optional AI-powered automation recommendations.",
+  "permissions": ["tabs", "storage"],
+  "host_permissions": [
+    "https://*.chatgpt.com/*",
+    "https://*.openai.com/*",
+    "https://github.com/*",
+    "https://mail.google.com/*",
+    "https://docs.google.com/*",
+    "https://slides.google.com/*",
+    "https://*.canva.com/*",
+    "https://api.openai.com/*"
+  ],
+  "content_scripts": [
+    {
+      "matches": [
+        "https://*.chatgpt.com/*",
+        "https://*.openai.com/*",
+        "https://github.com/*",
+        "https://mail.google.com/*",
+        "https://docs.google.com/*",
+        "https://slides.google.com/*",
+        "https://*.canva.com/*"
+      ],
+      "js": ["semantic-analyzer.js"],
+      "run_at": "document_idle"
+    }
+  ],
+  "background": {
+    "service_worker": "background.js"
+  },
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "InterveneAI"
+  }
+}

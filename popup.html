@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>InterveneAI</title>
+    <style>
+      :root { --ink: #171717; --muted: #6b6b6b; --line: #e6e6e6; --surface: #f7f7f6; --accent: #2d62ff; }
+      * { box-sizing: border-box; }
+      body { background: white; color: var(--ink); font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; margin: 0; min-width: 360px; }
+      main { padding: 18px; }
+      .masthead { align-items: center; display: flex; justify-content: space-between; margin-bottom: 18px; }
+      h1, h2 { letter-spacing: -.02em; margin: 0; }
+      h1 { font-size: 18px; font-weight: 650; }
+      h2 { font-size: 13px; font-weight: 650; }
+      .badge, #status { color: var(--muted); font-size: 11px; }
+      p { color: var(--muted); font-size: 12px; line-height: 1.45; margin: 7px 0; }
+      .intro { margin-bottom: 16px; max-width: 310px; }
+      .actions { display: flex; gap: 8px; margin: 12px 0; }
+      button { background: var(--ink); border: 1px solid var(--ink); border-radius: 6px; color: white; cursor: pointer; font-size: 12px; font-weight: 600; padding: 9px 11px; }
+      #stop { background: white; color: var(--ink); }
+      #analyze { background: var(--accent); width: 100%; }
+      button:disabled { background: var(--surface); border-color: var(--line); color: #aaa; cursor: default; }
+      section { border-top: 1px solid var(--line); margin-top: 17px; padding-top: 15px; }
+      .result { color: var(--ink); font-size: 12px; line-height: 1.5; margin: 10px 0; }
+      .empty { font-size: 12px; }
+      label { color: var(--ink); display: block; font-size: 12px; font-weight: 600; margin: 14px 0 6px; }
+      input { border: 1px solid #cfcfcf; border-radius: 6px; font-size: 12px; padding: 9px; width: 100%; }
+      .steps { margin: 10px 0 0; padding-left: 18px; }
+      .steps li { color: var(--muted); font-size: 12px; line-height: 1.5; margin-bottom: 3px; }
+      .privacy { font-size: 11px; }
+      ol:not(.steps) { font-size: 12px; line-height: 1.45; margin: 8px 0 0; padding-left: 20px; }
+      li { margin-bottom: 7px; }
+      a { color: var(--accent); font-weight: 600; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="masthead"><h1>InterveneAI</h1><span class="badge">Workflow assistant</span></div>
+      <p class="intro">Record tab switches, then get a local tool recommendation. Smart analysis adds a concise, tailored automation report.</p>
+      <div class="actions">
+        <button id="start" type="button">Start session</button>
+        <button id="stop" type="button">Stop & recommend</button>
+      </div>
+      <div id="status" role="status"></div>
+      <section id="results" aria-live="polite"><h2>Switch recommendations</h2></section>
+      <section id="diagnosis" aria-live="polite">
+        <h2>Smart analysis</h2>
+        <ol class="steps">
+          <li>Stop your session first.</li>
+          <li>Return to the ChatGPT conversation you want to analyze.</li>
+          <li>Enter your OpenAI Platform API key and select Smart analysis.</li>
+        </ol>
+        <label for="api-key">OpenAI Platform API key</label>
+        <input id="api-key" type="password" autocomplete="off" placeholder="sk-...">
+        <p class="privacy">The key stays only for this browser session. Smart analysis sends the compact session and active ChatGPT snapshot directly to OpenAI when you select it.</p>
+        <div class="actions">
+          <button id="analyze" type="button">Run Smart analysis</button>
+        </div>
+        <div id="report"></div>
+      </section>
+    </main>
+    <script src="popup.js"></script>
+  </body>
+</html>
